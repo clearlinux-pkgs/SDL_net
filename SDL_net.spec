@@ -4,7 +4,7 @@
 #
 Name     : SDL_net
 Version  : 1.2.8
-Release  : 3
+Release  : 4
 URL      : https://www.libsdl.org/projects/SDL_net/release/SDL_net-1.2.8.tar.gz
 Source0  : https://www.libsdl.org/projects/SDL_net/release/SDL_net-1.2.8.tar.gz
 Summary  : SDL portable network library
@@ -35,14 +35,15 @@ lib components for the SDL_net package.
 
 
 %prep
-cd ..
 %setup -q -n SDL_net-1.2.8
 
 %build
+export LANG=C
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
 %check
+export LANG=C
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost
@@ -58,9 +59,10 @@ rm -rf %{buildroot}
 %files dev
 %defattr(-,root,root,-)
 /usr/include/SDL/SDL_net.h
-/usr/lib64/*.so
-/usr/lib64/pkgconfig/*.pc
+/usr/lib64/libSDL_net.so
+/usr/lib64/pkgconfig/SDL_net.pc
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/*.so.*
+/usr/lib64/libSDL_net-1.2.so.0
+/usr/lib64/libSDL_net-1.2.so.0.8.0

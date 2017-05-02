@@ -4,7 +4,7 @@
 #
 Name     : SDL_net
 Version  : 1.2.8
-Release  : 5
+Release  : 6
 URL      : https://www.libsdl.org/projects/SDL_net/release/SDL_net-1.2.8.tar.gz
 Source0  : https://www.libsdl.org/projects/SDL_net/release/SDL_net-1.2.8.tar.gz
 Summary  : SDL portable network library

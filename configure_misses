@@ -1,2 +1,7 @@
+Configure miss: windres
+Configure miss: linux-gnu-windres
 Configure miss: GUI_Create in -lGUI
+Configure miss: windres
+Configure miss: i686-generic-linux-gnu-windres
+Configure miss: linux-gnu-windres
 Configure miss: GUI_Create in -lGUI

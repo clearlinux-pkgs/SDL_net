@@ -4,10 +4,10 @@
 #
 Name     : SDL_net
 Version  : 1.2.8
-Release  : 10
+Release  : 11
 URL      : https://www.libsdl.org/projects/SDL_net/release/SDL_net-1.2.8.tar.gz
 Source0  : https://www.libsdl.org/projects/SDL_net/release/SDL_net-1.2.8.tar.gz
-Summary  : A small sample cross-platform networking library
+Summary  : SDL portable network library
 Group    : Development/Tools
 License  : Zlib
 Requires: SDL_net-lib = %{version}-%{release}
@@ -81,8 +81,9 @@ popd
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1557077094
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1568876896
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -96,14 +97,14 @@ make  %{?_smp_mflags}
 pushd ../build32/
 export PKG_CONFIG_PATH="/usr/lib32/pkgconfig"
 export ASFLAGS="${ASFLAGS}${ASFLAGS:+ }--32"
-export CFLAGS="${CFLAGS}${CFLAGS:+ }-m32"
-export CXXFLAGS="${CXXFLAGS}${CXXFLAGS:+ }-m32"
-export LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-m32"
+export CFLAGS="${CFLAGS}${CFLAGS:+ }-m32 -mstackrealign"
+export CXXFLAGS="${CXXFLAGS}${CXXFLAGS:+ }-m32 -mstackrealign"
+export LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-m32 -mstackrealign"
 %configure --disable-static    --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
 make  %{?_smp_mflags}
 popd
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -112,7 +113,7 @@ cd ../build32;
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1557077094
+export SOURCE_DATE_EPOCH=1568876896
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/SDL_net
 cp COPYING %{buildroot}/usr/share/package-licenses/SDL_net/COPYING
